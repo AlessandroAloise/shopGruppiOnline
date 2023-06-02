@@ -1,0 +1,45 @@
+Table Utenti {
+  IDUtente INT [pk]
+  Nome VARCHAR(255)
+  Cognome VARCHAR(255)
+  Email VARCHAR(320)
+  Password VARCHAR(255)
+}
+
+Table Gruppi {
+  IDGruppo INT [pk]
+  NomeGruppo VARCHAR(255)
+  Termine1 Date
+  Termine2 Date
+  IDCapoGruppo INT [ref: > Utenti.IDUtente]
+}
+
+Table Prodotti {
+  IDProdotto INT [pk]
+  Codice INT
+  Nome VARCHAR(255)
+  Descrizione VARCHAR(255)
+  Immagine BLOB
+  Prezzo DECIMAL(10, 2) 
+  QuantitaMin INT
+  Multipli INT
+  IDGruppo INT [ref: > Gruppi.IDGruppo]
+  Visibile TINYINT
+}
+
+Table Partecipazioni {
+  IDPartecipazione INT [pk]
+  Richiesta TINYINT
+  IDUtente INT [ref: > Utenti.IDUtente]
+  IDGruppo INT [ref: > Gruppi.IDGruppo]
+}
+
+
+
+Table Carrello {
+  IDCarrello INT [pk]
+  IDUtente INT [ref: > Utenti.IDUtente]
+  IDProdotto INT [ref: > Prodotti.IDProdotto]
+  Quantita INT
+}
+
